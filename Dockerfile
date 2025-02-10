@@ -1,8 +1,6 @@
 # Use the provided base image
 FROM kong/kong-gateway:3.9.0.0
 
-LABEL maintainer="Hendrix ml-platform@spotify.com"
-
 # Copy the plugin binary
 USER root
 COPY go-hello /usr/local/bin/go-hello
