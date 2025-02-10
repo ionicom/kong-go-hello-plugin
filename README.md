@@ -1,10 +1,12 @@
 # kong-go-hello-plugin
 
+Build the plugin binary (go-hello):
 ```console
-# Build the plugin binary (go-hello):
 make
+```
 
-# Test the plugin binary:
+Test the plugin binary:
+```console
 ./go-hello --help
 Usage of ./go-hello:
   -dump
@@ -13,12 +15,16 @@ Usage of ./go-hello:
     	Show usage info
   -kong-prefix string
     	Kong prefix path (specified by the -p argument commonly used in the kong cli) (default "/usr/local/kong")
+```
 
-# Run Kong with docker-compose which runs the docker image defined in Dockerfile
-# which packages the plugin.
+Run Kong with docker-compose which runs the docker image defined in Dockerfile
+which packages the plugin.
+```console
 docker compose up
+```
 
-# Kong fails to start with error:
+Kong fails to start with error:
+```console
 2025/02/10 17:36:30 [warn] 1#0: the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /usr/local/kong/nginx.conf:7
 kong  | nginx: [warn] the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /usr/local/kong/nginx.conf:7
 kong  | 2025/02/10 17:36:30 [notice] 1#0: [lua] license_helpers.lua:196: read_license_info(): [license-helpers] could not decode license JSON: No license found
