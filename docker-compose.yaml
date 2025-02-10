@@ -18,7 +18,6 @@ services:
       - KONG_PLUGINSERVER_GO_HELLO_START_CMD=/usr/local/bin/go-hello
       - KONG_PLUGINSERVER_GO_HELLO_QUERY_CMD=/usr/local/bin/go-hello -dump
     volumes:
-      - ./kong-py-plugins:/opt/conf/kong-py-plugins
       - ./dbless_config:/opt/conf/dbless_config
     ports:
       - 8000:8000
