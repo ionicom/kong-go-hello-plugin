@@ -56,10 +56,36 @@ kong  | 2025/02/11 18:57:38 [notice] 1#0: start worker process 2583
 ...
 ```
 
-But the plugin logic does not seem to be executed (`x-hello-from-go`
-header is not present):
+The response from making an HTTP request to Kong proxy at path `/any` includes
+header `x-hello-from-go: Go says hello to localhost:8000`:
 ```console
-curl -X GET localhost:8000/any
+curl -v -X GET localhost:8000/any
+Note: Unnecessary use of -X or --request, GET is already inferred.
+* Host localhost:8000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:8000...
+* Connected to localhost (::1) port 8000
+> GET /any HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/8.7.1
+> Accept: */*
+>
+* Request completely sent off
+< HTTP/1.1 200 OK
+< Content-Type: application/json
+< Content-Length: 518
+< Connection: keep-alive
+< x-hello-from-go: Go says hello to localhost:8000
+< Date: Tue, 11 Feb 2025 22:24:35 GMT
+< Server: gunicorn/19.9.0
+< Access-Control-Allow-Origin: *
+< Access-Control-Allow-Credentials: true
+< X-Kong-Upstream-Latency: 28
+< X-Kong-Proxy-Latency: 180
+< Via: 1.1 kong/3.9.0.0-enterprise-edition
+< X-Kong-Request-Id: 4f0e1c1891720e65cf3c22083dba735b
+<
 {
   "args": {},
   "data": "",
@@ -69,15 +95,16 @@ curl -X GET localhost:8000/any
     "Accept": "*/*",
     "Host": "httpbin.org",
     "User-Agent": "curl/8.7.1",
-    "X-Amzn-Trace-Id": "Root=1-67ab9f5e-0ba5688054754d0d44572d8a",
+    "X-Amzn-Trace-Id": "Root=1-67abce23-0e37ae150c21c8f85d548408",
     "X-Forwarded-Host": "localhost",
     "X-Forwarded-Path": "/any",
     "X-Forwarded-Prefix": "/any",
-    "X-Kong-Request-Id": "7bc4e34bd715816fefea9542879ce527"
+    "X-Kong-Request-Id": "4f0e1c1891720e65cf3c22083dba735b"
   },
   "json": null,
   "method": "GET",
-  "origin": "172.20.0.1, 131.239.89.226",
+  "origin": "172.20.0.1, 69.74.205.19",
   "url": "http://localhost/anything"
 }
+* Connection #0 to host localhost left intact
 ```
